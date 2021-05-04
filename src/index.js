@@ -17,7 +17,6 @@ if (process.platform !== 'win32' || !(win === '10.0' || win === '8.1' || win ===
     ToastDismissalReason: noopObject,
     ToastNotification: NoopClass,
     TileNotification: NoopClass,
-    SecondaryTile: NoopClass,
     history: {
       remove: noop,
       clear: noop,
@@ -33,7 +32,6 @@ if (process.platform !== 'win32' || !(win === '10.0' || win === '8.1' || win ===
     ToastDismissalReason: require('@nodert-win10-20h1/windows.ui.notifications').ToastDismissalReason,
     ToastNotification: require('./toast-notification'),
     TileNotification: require('./tile-notification'),
-    SecondaryTile: require('./secondary-tile'),
     TileUpdater: require('./tile-updater'),
     history: require('./history'),
     Template: require('./template'),

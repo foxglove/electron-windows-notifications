@@ -28,10 +28,10 @@ class TileNotification {
     options.template = options.template || '' // todo: add default template
     options.strings = options.strings || []
 
-    let strings = options.strings.map(v => xmlEscape(v))
+    const strings = options.strings.map(v => xmlEscape(v))
 
     this.formattedXml = util.format(options.template, ...strings)
-    let xmlDocument = new xml.XmlDocument()
+    const xmlDocument = new xml.XmlDocument()
 
     // Sometimes, loading broken XML can wreak havoc
     try {
@@ -40,7 +40,7 @@ class TileNotification {
       throw new Error(`TileNotification: XML creation error: ${error}`)
     }
 
-    log(`Creating new tile notification`)
+    log('Creating new tile notification')
     log(this.formattedXml)
 
     this.tile = new notifications.TileNotification(xmlDocument)

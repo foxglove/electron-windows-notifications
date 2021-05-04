@@ -1,14 +1,14 @@
 const path = require('path')
-const {remote} = require('electron')
-const ElectronWindowsNotifications = require('electron-windows-notifications');
+const { remote } = require('electron')
+const ElectronWindowsNotifications = require('electron-windows-notifications')
 
-const {ToastNotification, TileNotification, Template, SecondaryTile} = ElectronWindowsNotifications
+const { ToastNotification, TileNotification, Template, SecondaryTile } = ElectronWindowsNotifications
 
 const iconPath = path.join(__dirname, '../../images/bp.png')
 const appId = 'electron-windows-notifications-sample'
-const textNode = $("#text")
+const textNode = $('#text')
 
-function sendNotification(evt) {
+function sendNotification (evt) {
   let template
   let strings
 
@@ -19,7 +19,7 @@ function sendNotification(evt) {
     })
 	  strings = ['Hi from Electron']
   } else if (evt.srcElement.id === 'image') {
-    template = new Template ({
+    template = new Template({
       templateText: '<text>%s</text>',
       templateImage: '<image id="1" src="%s"/><text>This is a simple image toast notification example</text>'
     })
@@ -34,12 +34,12 @@ function sendNotification(evt) {
   }
 
   // create the notification object
-  let notification = new ToastNotification({
-		appId: process.windowsStore ? undefined : appId,
-		template: template.getXML(),
-		strings: strings
+  const notification = new ToastNotification({
+    appId: process.windowsStore ? undefined : appId,
+    template: template.getXML(),
+    strings: strings
   })
-  
+
   // register to notification events
   notification.on('failed', () => textNode.text('Notification failed!'))
   notification.on('dismissed', () => textNode.text('Notification dismissed!'))
@@ -51,8 +51,8 @@ function sendNotification(evt) {
   notification.show()
 }
 
-function sendTile() {
-  let template = `
+function sendTile () {
+  const template = `
     <tile>
       <visual>
         <binding template="TileSmall">
@@ -70,11 +70,11 @@ function sendTile() {
       </visual>
     </tile>`.replace(/\>\s+\</g, '><')
 
-  let tile = new TileNotification({template})
-  tile.show();
+  const tile = new TileNotification({ template })
+  tile.show()
 }
 
-function createTile() {
+function createTile () {
   const secondaryTile = new SecondaryTile({
     tileId: 'hello',
     displayName: 'hello',
@@ -90,10 +90,10 @@ function createTile() {
 ElectronWindowsNotifications.setLogger(console.log)
 remote.getCurrentWebContents().toggleDevTools()
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('basic').addEventListener('click', sendNotification);
-  document.getElementById('image').addEventListener('click', sendNotification);
-  document.getElementById('actions').addEventListener('click', sendNotification);
-  document.getElementById('tile-notification').addEventListener('click', sendTile);
-  document.getElementById('tile-pin').addEventListener('click', createTile);
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('basic').addEventListener('click', sendNotification)
+  document.getElementById('image').addEventListener('click', sendNotification)
+  document.getElementById('actions').addEventListener('click', sendNotification)
+  document.getElementById('tile-notification').addEventListener('click', sendTile)
+  document.getElementById('tile-pin').addEventListener('click', createTile)
 })

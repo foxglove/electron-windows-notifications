@@ -10,7 +10,7 @@ const utils = {
    * @returns {number} Major & minor of Windows (8.0, 8.1, 10)
    */
   getWindowsVersion (version = os.release()) {
-    let match = version.match(/^(\d+).?(\d+).?(\*|\d+)$/)
+    const match = version.match(/^(\d+).?(\d+).?(\*|\d+)$/)
 
     if (match === null) {
       return version

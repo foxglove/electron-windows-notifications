@@ -33,10 +33,10 @@ class ToastNotification extends EventEmitter {
     options.strings = options.strings || []
     options.appId = options.appId || getAppId()
 
-    let strings = options.strings.map(v => xmlEscape(sanitize(v)))
+    const strings = options.strings.map(v => xmlEscape(sanitize(v)))
 
     this.formattedXml = util.format(options.template, ...strings)
-    let xmlDocument = new xml.XmlDocument()
+    const xmlDocument = new xml.XmlDocument()
 
     // Sometimes, loading broken XML can wreak havoc
     try {
@@ -45,7 +45,7 @@ class ToastNotification extends EventEmitter {
       throw new Error(`ToastNotification: XML creation error: ${error}`)
     }
 
-    log(`Creating new toast notification`)
+    log('Creating new toast notification')
     log(this.formattedXml)
 
     this.toast = new notifications.ToastNotification(xmlDocument)

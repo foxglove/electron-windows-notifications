@@ -12,7 +12,7 @@ class Template {
    * @memberOf Template
    */
   constructor (options = {}) {
-    let rootTemplate = '<toast launch="app-defined-string">' +
+    const rootTemplate = '<toast launch="app-defined-string">' +
                           '<visual>' +
                             '<binding template="ToastGeneric">' +
                               '%s' +
